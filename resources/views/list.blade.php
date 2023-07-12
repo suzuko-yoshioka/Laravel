@@ -45,25 +45,44 @@
                     </svg>
                 </div>
 
-                <div class="links">
+               <div class="links">
+
+            <div>
+                <form action="{{ route('search') }}" method="GET">
+                <input type="search" placeholder="キーワードを入力" name="search" value="@if (isset($search)) {{ $search }} @endif">
+                    <input type="submit" value="検索">
+                </form>
+            </div>
   <table>
      <thead>
         <tr>
             <th>ID</th>
-            <th>TITLE</th>
-            <th>URL</th>
-        </tr>
+            <th>商品画面</th>
+            <th>商品名</th>
+            <th>価格</th>
+            <th>在庫数</th>
+            <th>メーカー名</th>
+         </tr>
     </thead>
     <tbody>
     @foreach ($articles as $article)
         <tr>
             <td>{{ $article->id }}</td>
-            <td>{{ $article->title }}</td>
-            <td>{{ $article->url }}</td>
+            <td>{{ $article->image }}</td>
+            <td>{{ $article->name }}</td>
+            <td>{{ $article->price }}</td>
+            <td>{{ $article->stock }}</td>
+            <td>{{ $article->company }}</td>
+            <td><button><a href="{{ route('show',$article->id) }}" class="btn btn-primary">詳細</a></button></td>
+            <form method="POST" action="{{route('delete',$article->id)}}" onSubmit="return checkDelete()">
+                @csrf
+            <td><button type="submit" class="btn btn-danger" onClick=>削除</button></td>
         </tr>
     @endforeach
     </tbody>
   </table>
+  <button><a href="{{ route('regist') }}" class="btn">登録</a></button>
+
 </div>
     </body>
 </html>

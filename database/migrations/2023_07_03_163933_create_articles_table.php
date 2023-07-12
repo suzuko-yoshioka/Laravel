@@ -15,9 +15,12 @@ return new class extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title');
-            $table->string('url');
-            $table->text('comment')->nullable();
+            $table->string('image');
+            $table->string('name');
+            $table->integer('price');
+            $table->integer('stock');
+            $table->text('company');
+            $table->text('comment');            
             $table->timestamps();
         });
     }
